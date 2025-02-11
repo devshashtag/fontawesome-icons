@@ -1,0 +1,40 @@
+@use '../abstracts' as *;
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  cursor: default;
+  background-color: $scroll-bar-bg;
+  height: $scroll-bar-height;
+  width: $scroll-bar-width;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background-color: $scroll-bar;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background-color: $scroll-bar-hover;
+}

@@ -1,0 +1,36 @@
+@use '../abstracts' as *;
+
+html {
+  // 16 * 0.5 = 1rem = 8px
+  font-size: 0.5rem;
+  scroll-behavior: smooth;
+  height: 100%;
+
+  // 1rem = 10px
+  @include breakpoint(sm) {
+    font-size: 0.625rem;
+  }
+
+  // 1rem = 12px
+  @include breakpoint(sm) {
+    font-size: 0.75rem;
+  }
+
+  // 1rem = 14px
+  @include breakpoint(lg) {
+    font-size: 0.875rem;
+  }
+
+  // 1rem = 16px
+  @include breakpoint(2xl) {
+    font-size: 1rem;
+  }
+}
+
+body {
+  height: 100%;
+  font-size: 1rem;
+
+  background-color: $page-bg;
+  color: $page-fg;
+}
