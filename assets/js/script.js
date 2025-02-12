@@ -24,7 +24,7 @@ function downloadSVG(svg, name) {
 }
 
 function createListIcon(svg, type, name) {
-  const iconClass = [...type.split('-').map((type) => 'fa-' + type), 'fa-' + name].join(' ');
+  const iconClass = [...type.split(/-(?=[^-]*$)/).map((type) => 'fa-' + type), 'fa-' + name].join(' ');
 
   return `
     <!-- icon -->
