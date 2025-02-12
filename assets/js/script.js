@@ -77,9 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const iconClass = icon.dataset.class;
       const iconSVG = icon.querySelector('.icon__preview').innerHTML;
       const iconName = icon.querySelector('.icon__name').innerHTML;
-      console.log(icon, iconClass, iconSVG, iconName);
 
-      if (iconsDownload.classList.contains('download--acctive')) return;
+      // skip if iconsDownload is open
+      // if (iconsDownload.classList.contains('download--active')) return;
 
       downloadName.innerText = iconName;
       downloadPreview.innerHTML = iconSVG;
