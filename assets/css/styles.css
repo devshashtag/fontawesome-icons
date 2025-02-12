@@ -137,6 +137,10 @@ body {
   background-color: #585858;
   color: #fbf3c6;
 }
+.notifications .notification.info span {
+  text-transform: none;
+  color: #97ff67;
+}
 .notifications .notification.error {
   box-shadow: 0 0 0.5rem #423d41;
   background-color: #423d41;
@@ -146,6 +150,10 @@ body {
   box-shadow: 0 0 0.5rem #3d423f;
   background-color: #3d423f;
   color: #97ff67;
+}
+.notifications .notification span {
+  text-transform: none;
+  color: #fbf3c6;
 }
 
 main.main {
@@ -175,7 +183,7 @@ main.main .icons__search #name {
   background-color: #353a40;
   color: #b3b3b3;
 }
-main.main .icons__search #name:placeholder {
+main.main .icons__search #name::placeholder {
   text-transform: capitalize;
   color: #919191;
 }
@@ -197,11 +205,13 @@ main.main .icons__search #search:hover {
   fill: #fbf3c6;
 }
 main.main .icons__list {
-  position: relative;
   background-color: #3a4047;
   padding: 0.5rem;
   display: flex;
   justify-content: center;
+}
+main.main .icons__list:has(.icons__results:empty) {
+  display: none;
 }
 main.main .icons__list .icons__results {
   background-color: #353a40;
@@ -209,6 +219,7 @@ main.main .icons__list .icons__results {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-flow: row dense;
+  width: 100%;
   gap: 1rem;
 }
 @media (min-width: 576px) {
@@ -243,15 +254,21 @@ main.main .icons__list .icons__icon .icon__preview {
   justify-content: center;
   aspect-ratio: 1;
   padding: 2rem;
-  fill: #56b87c;
+  fill: #56a3b8;
+  transition: transform 0.2s linear;
+}
+main.main .icons__list .icons__icon .icon__preview:hover {
+  transform: scale(1.5);
 }
 main.main .icons__list .icons__icon .icon__name {
   text-align: center;
   font-size: 1rem;
 }
 main.main .icons__list .icons__download {
-  position: absolute;
-  top: 1rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: none;
   flex-direction: column;
   align-items: center;
@@ -270,24 +287,24 @@ main.main .icons__list .icons__download .download__header {
   align-items: center;
   width: 100%;
 }
-main.main .icons__list .icons__download .download__header .header__name {
+main.main .icons__list .icons__download .download__name {
   color: #fcd8a1;
 }
-main.main .icons__list .icons__download .download__header .header__name:before, main.main .icons__list .icons__download .download__header .header__name:after {
+main.main .icons__list .icons__download .download__name:before, main.main .icons__list .icons__download .download__name:after {
   content: "⊰";
   display: inline;
   color: #ec406a;
 }
-main.main .icons__list .icons__download .download__header .header__name:after {
+main.main .icons__list .icons__download .download__name:after {
   content: "⊱";
 }
-main.main .icons__list .icons__download .download__header .header__icons {
+main.main .icons__list .icons__download .download__icons {
   display: flex;
   gap: 1rem;
 }
-main.main .icons__list .icons__download .download__header .header__icons .copy,
-main.main .icons__list .icons__download .download__header .header__icons .download,
-main.main .icons__list .icons__download .download__header .header__icons .close {
+main.main .icons__list .icons__download .download__icons .copy,
+main.main .icons__list .icons__download .download__icons .download,
+main.main .icons__list .icons__download .download__icons .close {
   cursor: pointer;
   box-sizing: content-box;
   display: grid;
@@ -296,18 +313,21 @@ main.main .icons__list .icons__download .download__header .header__icons .close 
   width: 20px;
   transition: filter 0.2s linear, fill 0.3s linear, transform 0.2s linear;
 }
-main.main .icons__list .icons__download .download__header .header__icons .copy:hover,
-main.main .icons__list .icons__download .download__header .header__icons .download:hover,
-main.main .icons__list .icons__download .download__header .header__icons .close:hover {
+main.main .icons__list .icons__download .download__icons .copy:hover,
+main.main .icons__list .icons__download .download__icons .download:hover,
+main.main .icons__list .icons__download .download__icons .close:hover {
   fill: #fcd8a1;
   filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.6666666667));
   transform: scale(1.5);
 }
-main.main .icons__list .icons__download .download__header .header__icons .copy,
-main.main .icons__list .icons__download .download__header .header__icons .download {
+main.main .icons__list .icons__download .download__icons .copy,
+main.main .icons__list .icons__download .download__icons .download {
   width: 18px;
 }
-main.main .icons__list .icons__download .download__header .header__icons .close:hover {
+main.main .icons__list .icons__download .download__icons .close {
+  margin-left: 1rem;
+}
+main.main .icons__list .icons__download .download__icons .close:hover {
   fill: #e77f8f;
 }
 main.main .icons__list .icons__download .download__preview {
@@ -316,19 +336,19 @@ main.main .icons__list .icons__download .download__preview {
   justify-content: center;
   height: 10rem;
   padding: 1rem;
-  fill: #56b87c;
+  fill: #56a3b8;
   transition: transform 0.2s linear;
 }
 main.main .icons__list .icons__download .download__preview:hover {
   transform: scale(1.2);
 }
-main.main .icons__list .icons__download .download__element {
-  padding: 1rem;
+main.main .icons__list .icons__download .download__class {
+  padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: #303339;
   color: #c4c5ef;
 }
-main.main .icons__list .icons__download .download__element .element__type {
+main.main .icons__list .icons__download .download__class span {
   color: #fce2a1;
 }
 

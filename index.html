@@ -14,7 +14,7 @@
       <section class="main__icons">
         <!-- search -->
         <form class="icons__search" action="#">
-          <input type="text" name="name" id="name" value="check" />
+          <input type="text" name="name" id="name" value="" placeholder="search font-awesome icons...." />
 
           <button class="search" id="search">
             <svg><use href="assets/icons/search.svg#search"></use></svg>
@@ -24,21 +24,13 @@
         <!-- icons -->
         <div class="icons__list">
           <!-- results -->
-          <div class="icons__results" id="iconsResults">
-            <!-- icon -->
-            <div class="icons__icon" data-classes="fa-solid fa-search">
-              <div class="icon__preview">
-                <svg><use href="assets/icons/search.svg#search"></use></svg>
-              </div>
-              <div class="icon__name">search</div>
-            </div>
-          </div>
+          <ul class="icons__results" id="iconsResults"></ul>
 
           <!-- download -->
-          <div class="icons__download download--active" id="icons__download">
+          <div class="icons__download" id="iconsDownload">
             <div class="download__header">
-              <div class="header__name">search</div>
-              <div class="header__icons">
+              <div class="download__name">search</div>
+              <div class="download__icons">
                 <svg class="copy"><use href="assets/icons/copy.svg#copy"></use></svg>
                 <svg class="download"><use href="assets/icons/download.svg#download"></use></svg>
                 <svg class="close"><use href="assets/icons/close.svg#close"></use></svg>
@@ -47,7 +39,7 @@
             <div class="download__preview">
               <svg><use href="assets/icons/search.svg#search"></use></svg>
             </div>
-            <div class="download__element">&lt;i class="<span class="element__type">fa-solid fa-search</span>" aria-hidden="true"&gt;&lt/i&gt;</div>
+            <div class="download__class">&lt;i class="<span>fa-solid fa-search</span>" aria-hidden="true"&gt;&lt/i&gt;</div>
           </div>
         </div>
       </section>
@@ -55,9 +47,9 @@
       <!-- notification -->
       <div class="notifications">
         <ul class="notification-list" id="notificationList">
-          <li class="notification info show">example.</li>
+          <!-- <li class="notification info show">example.</li>
           <li class="notification success show">example.</li>
-          <li class="notification error show">example.</li>
+          <li class="notification error show">example.</li> -->
         </ul>
       </div>
     </main>

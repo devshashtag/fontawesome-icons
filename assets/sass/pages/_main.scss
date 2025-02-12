@@ -31,7 +31,7 @@ main.main {
       background-color: $search-input-bg;
       color: $search-input-fg;
 
-      &:placeholder {
+      &::placeholder {
         text-transform: capitalize;
         color: $search-input-placeholder-fg;
       }
@@ -62,12 +62,15 @@ main.main {
 
   // icons
   .icons__list {
-    position: relative;
     background-color: $list-bg;
     padding: 0.5rem;
 
     display: flex;
     justify-content: center;
+
+    &:has(.icons__results:empty) {
+      display: none;
+    }
 
     // results
     .icons__results {
@@ -76,6 +79,7 @@ main.main {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-auto-flow: row dense;
+      width: 100%;
 
       gap: 1rem;
 
@@ -109,6 +113,12 @@ main.main {
         aspect-ratio: 1;
         padding: 2rem;
         fill: $result-icon-fg;
+
+        transition: transform 0.2s linear;
+
+        &:hover {
+          transform: scale(1.5);
+        }
       }
 
       .icon__name {
@@ -119,8 +129,10 @@ main.main {
 
     // download
     .icons__download {
-      position: absolute;
-      top: 1rem;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       display: none;
       flex-direction: column;
@@ -141,53 +153,57 @@ main.main {
         justify-content: space-between;
         align-items: center;
         width: 100%;
+      }
 
-        .header__name {
-          color: $download-name-fg;
+      .download__name {
+        color: $download-name-fg;
 
-          &:before,
-          &:after {
-            content: '⊰';
-            display: inline;
-            color: $download-name-symbols-fg;
-          }
+        &:before,
+        &:after {
+          content: '⊰';
+          display: inline;
+          color: $download-name-symbols-fg;
+        }
 
-          &:after {
-            content: '⊱';
+        &:after {
+          content: '⊱';
+        }
+      }
+
+      .download__icons {
+        display: flex;
+        gap: 1rem;
+
+        .copy,
+        .download,
+        .close {
+          cursor: pointer;
+          box-sizing: content-box;
+
+          display: grid;
+          place-items: center;
+
+          fill: $download-icon-fg;
+          width: 20px;
+
+          transition: filter 0.2s linear, fill 0.3s linear, transform 0.2s linear;
+
+          &:hover {
+            fill: $download-icon-hover-fg;
+            filter: drop-shadow(0 0 0.2rem #000a);
+            transform: scale(1.5);
           }
         }
 
-        .header__icons {
-          display: flex;
-          gap: 1rem;
+        .copy,
+        .download {
+          width: 18px;
+        }
 
-          .copy,
-          .download,
-          .close {
-            cursor: pointer;
-            box-sizing: content-box;
+        .close {
+          margin-left: 1rem;
 
-            display: grid;
-            place-items: center;
-
-            fill: $download-icon-fg;
-            width: 20px;
-
-            transition: filter 0.2s linear, fill 0.3s linear, transform 0.2s linear;
-
-            &:hover {
-              fill: $download-icon-hover-fg;
-              filter: drop-shadow(0 0 0.2rem #000a);
-              transform: scale(1.5);
-            }
-          }
-
-          .copy,
-          .download {
-            width: 18px;
-          }
-
-          .close:hover {
+          &:hover {
             fill: $download-close-hover-fg;
           }
         }
@@ -208,12 +224,12 @@ main.main {
         }
       }
 
-      .download__element {
-        padding: 1rem;
+      .download__class {
+        padding: 0.5rem;
         border-radius: 0.5rem;
         background-color: $download-info-bg;
         color: $download-element-fg;
-        .element__type {
+        span {
           color: $download-type-fg;
         }
       }
