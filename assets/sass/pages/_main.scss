@@ -1,1 +1,222 @@
 @use '../abstracts' as *;
+
+main.main {
+  padding: 0.5rem;
+
+  @include breakpoint(md) {
+    padding: 1rem;
+  }
+
+  .main__icons {
+    display: flex;
+    flex-direction: column;
+
+    max-width: $page-width;
+    margin: 0 auto;
+  }
+
+  // search
+  .icons__search {
+    padding: 0.5rem;
+    display: flex;
+    background-color: $search-bg;
+
+    #name {
+      flex: 1;
+
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      width: 100%;
+
+      background-color: $search-input-bg;
+      color: $search-input-fg;
+
+      &:placeholder {
+        text-transform: capitalize;
+        color: $search-input-placeholder-fg;
+      }
+    }
+
+    #search {
+      box-sizing: content-box;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 1rem;
+      max-height: 3rem;
+      aspect-ratio: 1;
+
+      background-color: $search-input-bg;
+      fill: $search-icon-fg;
+      transition: filter 0.2s linear, fill 0.3s linear;
+
+      &:hover {
+        filter: drop-shadow(0 0 0.2rem #0005);
+        fill: $search-icon-hover-fg;
+      }
+    }
+  }
+
+  // icons
+  .icons__list {
+    position: relative;
+    background-color: $list-bg;
+    padding: 0.5rem;
+
+    display: flex;
+    justify-content: center;
+
+    // results
+    .icons__results {
+      background-color: $result-bg;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-flow: row dense;
+
+      gap: 1rem;
+
+      @include breakpoint(sm) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      @include breakpoint(md) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      @include breakpoint(lg) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      @include breakpoint(xl) {
+        grid-template-columns: repeat(7, 1fr);
+      }
+    }
+
+    .icons__icon {
+      cursor: pointer;
+      border-radius: 0.2rem;
+      background-color: $result-icon-bg;
+      padding: 1rem;
+
+      .icon__preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        padding: 2rem;
+        fill: $result-icon-fg;
+      }
+
+      .icon__name {
+        text-align: center;
+        font-size: 1rem;
+      }
+    }
+
+    // download
+    .icons__download {
+      position: absolute;
+      top: 1rem;
+
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.2rem;
+      gap: 1rem;
+
+      background-color: $download-bg;
+      padding: 1rem;
+
+      &.download--active {
+        display: flex;
+      }
+
+      .download__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .header__name {
+          color: $download-name-fg;
+
+          &:before,
+          &:after {
+            content: '⊰';
+            display: inline;
+            color: $download-name-symbols-fg;
+          }
+
+          &:after {
+            content: '⊱';
+          }
+        }
+
+        .header__icons {
+          display: flex;
+          gap: 1rem;
+
+          .copy,
+          .download,
+          .close {
+            cursor: pointer;
+            box-sizing: content-box;
+
+            display: grid;
+            place-items: center;
+
+            fill: $download-icon-fg;
+            width: 20px;
+
+            transition: filter 0.2s linear, fill 0.3s linear, transform 0.2s linear;
+
+            &:hover {
+              fill: $download-icon-hover-fg;
+              filter: drop-shadow(0 0 0.2rem #000a);
+              transform: scale(1.5);
+            }
+          }
+
+          .copy,
+          .download {
+            width: 18px;
+          }
+
+          .close:hover {
+            fill: $download-close-hover-fg;
+          }
+        }
+      }
+
+      .download__preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 10rem;
+        padding: 1rem;
+        fill: $result-icon-fg;
+
+        transition: transform 0.2s linear;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+
+      .download__element {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: $download-info-bg;
+        color: $download-element-fg;
+        .element__type {
+          color: $download-type-fg;
+        }
+      }
+    }
+  }
+}

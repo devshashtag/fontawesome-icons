@@ -9,22 +9,40 @@ $scroll-bar: #505050;
 $scroll-bar-hover: #808080;
 $scroll-bar-bg: #202020;
 
-/* input */
-$input-bg: #3a4047;
-$input-fg: #cbcbcb;
-$input-placeholder-fg: #919191;
-
-/* icon */
-$icon-bg: #353a40;
-$icon-fg: #6a7070;
-
-/* submit */
+// submit
 $submit-bg: #575c62;
 $submit-fg: #cbcbcb;
 $submit-bg-hover: #6a7078;
 $submit-fg-hover: #ebebeb;
 
-/* notification */
+// search
+$search-bg: #3a4047;
+$search-input-bg: #353a40;
+$search-input-fg: $page-fg;
+$search-input-placeholder-fg: #919191;
+$search-icon-fg: #cacaca;
+$search-icon-hover-fg: #fbf3c6;
+
+// lists
+$list-bg: #3a4047;
+
+// results
+$result-bg: #353a40;
+$result-icon-bg: #42474d;
+$result-icon-fg: #56b87c;
+
+// download
+$download-bg: #3e424a;
+$download-name-fg: #fcd8a1;
+$download-name-symbols-fg: #ec406a;
+$download-icon-fg: #99abc0;
+$download-icon-hover-fg: #fcd8a1;
+$download-close-hover-fg: #e77f8f;
+$download-info-bg: #303339;
+$download-element-fg: #c4c5ef;
+$download-type-fg: #fce2a1;
+
+// notification
 $notification-info-bg: #585858;
 $notification-info-fg: #fbf3c6;
 
@@ -35,8 +53,8 @@ $notification-success-bg: #3d423f;
 $notification-success-fg: #97ff67;
 
 //* sizes
-$page-width: 123rem;
+$page-width: 80rem;
 
 // scroll-bar
-$scroll-bar-height: 8px;
-$scroll-bar-width: 8px;
+$scroll-bar-height: 0.8rem;
+$scroll-bar-width: 0.8rem;

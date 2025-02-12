@@ -1,10 +1,8 @@
-/* input */
-/* icon */
-/* submit */
-/* notification */
+@charset "UTF-8";
 *,
 ::after,
 ::before {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   outline: none;
   border: none;
@@ -20,11 +18,47 @@ a {
   text-decoration: none;
 }
 
+input {
+  color: inherit;
+  background-color: inherit;
+}
+
+svg,
+img,
+video {
+  width: 100%;
+  height: 100%;
+}
+
+svg {
+  aspect-ratio: 1;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+li {
+  list-style-type: none;
+}
+
 ::-webkit-scrollbar {
   cursor: default;
   background-color: #202020;
-  height: 8px;
-  width: 8px;
+  height: 0.8rem;
+  width: 0.8rem;
 }
 
 ::-webkit-scrollbar-corner {
@@ -112,6 +146,190 @@ body {
   box-shadow: 0 0 0.5rem #3d423f;
   background-color: #3d423f;
   color: #97ff67;
+}
+
+main.main {
+  padding: 0.5rem;
+}
+@media (min-width: 768px) {
+  main.main {
+    padding: 1rem;
+  }
+}
+main.main .main__icons {
+  display: flex;
+  flex-direction: column;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+main.main .icons__search {
+  padding: 0.5rem;
+  display: flex;
+  background-color: #3a4047;
+}
+main.main .icons__search #name {
+  flex: 1;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  width: 100%;
+  background-color: #353a40;
+  color: #b3b3b3;
+}
+main.main .icons__search #name:placeholder {
+  text-transform: capitalize;
+  color: #919191;
+}
+main.main .icons__search #search {
+  box-sizing: content-box;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  max-height: 3rem;
+  aspect-ratio: 1;
+  background-color: #353a40;
+  fill: #cacaca;
+  transition: filter 0.2s linear, fill 0.3s linear;
+}
+main.main .icons__search #search:hover {
+  filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.3333333333));
+  fill: #fbf3c6;
+}
+main.main .icons__list {
+  position: relative;
+  background-color: #3a4047;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+main.main .icons__list .icons__results {
+  background-color: #353a40;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: row dense;
+  gap: 1rem;
+}
+@media (min-width: 576px) {
+  main.main .icons__list .icons__results {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  main.main .icons__list .icons__results {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  main.main .icons__list .icons__results {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  main.main .icons__list .icons__results {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+main.main .icons__list .icons__icon {
+  cursor: pointer;
+  border-radius: 0.2rem;
+  background-color: #42474d;
+  padding: 1rem;
+}
+main.main .icons__list .icons__icon .icon__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  padding: 2rem;
+  fill: #56b87c;
+}
+main.main .icons__list .icons__icon .icon__name {
+  text-align: center;
+  font-size: 1rem;
+}
+main.main .icons__list .icons__download {
+  position: absolute;
+  top: 1rem;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.2rem;
+  gap: 1rem;
+  background-color: #3e424a;
+  padding: 1rem;
+}
+main.main .icons__list .icons__download.download--active {
+  display: flex;
+}
+main.main .icons__list .icons__download .download__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+main.main .icons__list .icons__download .download__header .header__name {
+  color: #fcd8a1;
+}
+main.main .icons__list .icons__download .download__header .header__name:before, main.main .icons__list .icons__download .download__header .header__name:after {
+  content: "⊰";
+  display: inline;
+  color: #ec406a;
+}
+main.main .icons__list .icons__download .download__header .header__name:after {
+  content: "⊱";
+}
+main.main .icons__list .icons__download .download__header .header__icons {
+  display: flex;
+  gap: 1rem;
+}
+main.main .icons__list .icons__download .download__header .header__icons .copy,
+main.main .icons__list .icons__download .download__header .header__icons .download,
+main.main .icons__list .icons__download .download__header .header__icons .close {
+  cursor: pointer;
+  box-sizing: content-box;
+  display: grid;
+  place-items: center;
+  fill: #99abc0;
+  width: 20px;
+  transition: filter 0.2s linear, fill 0.3s linear, transform 0.2s linear;
+}
+main.main .icons__list .icons__download .download__header .header__icons .copy:hover,
+main.main .icons__list .icons__download .download__header .header__icons .download:hover,
+main.main .icons__list .icons__download .download__header .header__icons .close:hover {
+  fill: #fcd8a1;
+  filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.6666666667));
+  transform: scale(1.5);
+}
+main.main .icons__list .icons__download .download__header .header__icons .copy,
+main.main .icons__list .icons__download .download__header .header__icons .download {
+  width: 18px;
+}
+main.main .icons__list .icons__download .download__header .header__icons .close:hover {
+  fill: #e77f8f;
+}
+main.main .icons__list .icons__download .download__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  padding: 1rem;
+  fill: #56b87c;
+  transition: transform 0.2s linear;
+}
+main.main .icons__list .icons__download .download__preview:hover {
+  transform: scale(1.2);
+}
+main.main .icons__list .icons__download .download__element {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #303339;
+  color: #c4c5ef;
+}
+main.main .icons__list .icons__download .download__element .element__type {
+  color: #fce2a1;
 }
 
 /*# sourceMappingURL=styles.css.map */
