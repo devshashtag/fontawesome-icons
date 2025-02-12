@@ -1,11 +1,7 @@
 @use '../abstracts' as *;
 
 main.main {
-  padding: 0.5rem;
-
-  @include breakpoint(md) {
-    padding: 1rem;
-  }
+  padding: 1rem;
 
   .main__icons {
     display: flex;
@@ -17,7 +13,7 @@ main.main {
 
   // search
   .icons__search {
-    padding: 0.5rem;
+    padding: 1rem;
     display: flex;
     background-color: $search-bg;
 
@@ -63,7 +59,7 @@ main.main {
   // icons
   .icons__list {
     background-color: $list-bg;
-    padding: 0.5rem;
+    padding: 1rem;
 
     display: flex;
     justify-content: center;
@@ -100,6 +96,7 @@ main.main {
       }
     }
 
+    // icon
     .icons__icon {
       cursor: pointer;
       border-radius: 0.2rem;
@@ -139,7 +136,9 @@ main.main {
       align-items: center;
       justify-content: center;
       border-radius: 0.2rem;
-      gap: 1rem;
+      max-width: 30rem;
+      width: 100%;
+      gap: 2rem;
 
       background-color: $download-bg;
       padding: 1rem;
@@ -153,30 +152,69 @@ main.main {
         justify-content: space-between;
         align-items: center;
         width: 100%;
-      }
 
-      .download__name {
-        color: $download-name-fg;
+        .download__name {
+          color: $download-name-fg;
 
-        &:before,
-        &:after {
-          content: '⊰';
-          display: inline;
-          color: $download-name-symbols-fg;
+          &:before,
+          &:after {
+            content: '⊰';
+            display: inline;
+            color: $download-name-symbols-fg;
+          }
+
+          &:after {
+            content: '⊱';
+          }
         }
 
-        &:after {
-          content: '⊱';
+        .download__icons {
+          display: flex;
+          gap: 1rem;
+
+          .icon__copy,
+          .icon__download,
+          .icon__close {
+            cursor: pointer;
+            box-sizing: content-box;
+
+            display: grid;
+            place-items: center;
+
+            fill: $download-icon-fg;
+            width: 2rem;
+
+            transition: filter 0.2s linear, fill 0.3s linear, transform 0.2s linear;
+
+            &:hover {
+              fill: $download-icon-hover-fg;
+              filter: drop-shadow(0 0 0.2rem #000a);
+              transform: scale(1.5);
+            }
+          }
+
+          .icon__copy,
+          .icon__download {
+            width: 1.8rem;
+          }
+
+          .icon__close {
+            margin-left: 1rem;
+
+            &:hover {
+              fill: $download-close-hover-fg;
+            }
+          }
         }
       }
-
-      .download__icons {
+      .download__view {
         display: flex;
-        gap: 1rem;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
 
-        .copy,
-        .download,
-        .close {
+        .view__previous,
+        .view__next {
           cursor: pointer;
           box-sizing: content-box;
 
@@ -184,51 +222,44 @@ main.main {
           place-items: center;
 
           fill: $download-icon-fg;
-          width: 20px;
+          width: 3rem;
 
           transition: filter 0.2s linear, fill 0.3s linear, transform 0.2s linear;
 
           &:hover {
             fill: $download-icon-hover-fg;
+
             filter: drop-shadow(0 0 0.2rem #000a);
             transform: scale(1.5);
           }
         }
 
-        .copy,
-        .download {
-          width: 18px;
-        }
+        .download__preview {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 10rem;
+          padding: 1rem;
+          fill: $result-icon-fg;
 
-        .close {
-          margin-left: 1rem;
+          background-color: $result-icon-bg;
+          border-radius: 0.5rem;
+
+          transition: padding 0.2s linear;
 
           &:hover {
-            fill: $download-close-hover-fg;
+            padding: 0.5rem;
           }
-        }
-      }
-
-      .download__preview {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 10rem;
-        padding: 1rem;
-        fill: $result-icon-fg;
-
-        transition: transform 0.2s linear;
-
-        &:hover {
-          transform: scale(1.2);
         }
       }
 
       .download__class {
         padding: 0.5rem;
         border-radius: 0.5rem;
+        font-size: 1rem;
         background-color: $download-info-bg;
         color: $download-element-fg;
+
         span {
           color: $download-type-fg;
         }

@@ -45,10 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const iconsResults = document.getElementById('iconsResults');
 
   const iconsDownload = document.getElementById('iconsDownload');
-  const downloadIcons = iconsDownload.querySelector('.download__icons');
   const downloadName = iconsDownload.querySelector('.download__name');
   const downloadPreview = iconsDownload.querySelector('.download__preview');
   const downloadClass = iconsDownload.querySelector('.download__class');
+
+  function displayDownload(icon) {
+    const iconClass = icon.dataset.class;
+    const iconSVG = icon.querySelector('.icon__preview').innerHTML;
+    const iconName = icon.querySelector('.icon__name').innerHTML;
+
+    // skip if iconsDownload is open
+    // if (iconsDownload.classList.contains('download--active')) return;
+
+    downloadName.innerText = iconName;
+    downloadPreview.innerHTML = iconSVG;
+    downloadClass.innerHTML = `&lt;i class="<span>${iconClass}</span>"&gt;&lt/i&gt;`;
+
+    // active download area
+    iconsDownload.classList.add('download--active');
+  }
 
   // search
   searchBtn.addEventListener('click', async (e) => {
@@ -74,42 +89,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const icon = e.target.closest('.icons__icon');
 
     if (icon) {
-      const iconClass = icon.dataset.class;
-      const iconSVG = icon.querySelector('.icon__preview').innerHTML;
-      const iconName = icon.querySelector('.icon__name').innerHTML;
-
-      // skip if iconsDownload is open
-      // if (iconsDownload.classList.contains('download--active')) return;
-
-      downloadName.innerText = iconName;
-      downloadPreview.innerHTML = iconSVG;
-      downloadClass.innerHTML = `&lt;i class="<span>${iconClass}</span>" aria-hidden="true"&gt;&lt/i&gt;`;
-
-      // active download area
-      iconsDownload.classList.add('download--active');
+      displayDownload(icon);
     }
   });
 
-  downloadIcons.addEventListener('click', (e) => {
+  iconsDownload.addEventListener('click', (e) => {
     const element = e.target;
-    const copy = element.closest('.copy');
-    const download = element.closest('.download');
-    const close = element.closest('.close');
-    const name = downloadName.innerText;
-    const svg = downloadPreview.innerHTML;
+
+    // buttons
+    const copy = element.closest('.icon__copy');
+    const download = element.closest('.icon__download');
+    const close = element.closest('.icon__close');
+    const previous = element.closest('.view__previous');
+    const next = element.closest('.view__next');
+
+    const iconName = downloadName.innerText;
+    const iconSVG = downloadPreview.innerHTML;
+    const iconClass = downloadClass.querySelector('span').innerHTML;
 
     if (copy) {
-      copyToClipboard(svg);
-      notification.displaySuccess(`the <span>${name}.svg</span> has been successfully copied to your clipboard.`);
-    }
-
-    if (download) {
-      downloadSVG(svg, name);
-      notification.displaySuccess(`the <span>${name}.svg</span> has been successfully saved.`);
-    }
-
-    if (close) {
+      copyToClipboard(iconSVG);
+      notification.displaySuccess(`the <span>${iconName}.svg</span> has been successfully copied to your clipboard.`);
+    } else if (download) {
+      downloadSVG(iconSVG, iconName);
+      notification.displaySuccess(`the <span>${iconName}.svg</span> has been successfully saved.`);
+    } else if (close) {
       iconsDownload.classList.remove('download--active');
+    } else if (previous) {
+      const previousIcon = iconsResults.querySelector(`.icons__icon:has(+[data-class="${iconClass}"])`);
+      displayDownload(previousIcon);
+    } else if (next) {
+      const nextIcon = iconsResults.querySelector(`[data-class="${iconClass}"] + .icons__icon`);
+      displayDownload(nextIcon);
     }
   });
 });
