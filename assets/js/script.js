@@ -38,8 +38,8 @@ function createListIcon(svg, type, name) {
 document.addEventListener('DOMContentLoaded', () => {
   let notification = new Notification();
 
-  const version = '6.7.2';
   const types = getIconTypes();
+  const versionInput = document.getElementById('version');
   const nameInput = document.getElementById('name');
   const searchBtn = document.getElementById('search');
   const iconsResults = document.getElementById('iconsResults');
@@ -54,14 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconSVG = icon.querySelector('.icon__preview').innerHTML;
     const iconName = icon.querySelector('.icon__name').innerHTML;
 
-    // skip if iconsDownload is open
-    // if (iconsDownload.classList.contains('download--active')) return;
-
     downloadName.innerText = iconName;
     downloadPreview.innerHTML = iconSVG;
     downloadClass.innerHTML = `&lt;i class="<span>${iconClass}</span>"&gt;&lt/i&gt;`;
 
-    // active download area
+    // display download preview
     iconsDownload.classList.add('download--active');
   }
 
@@ -69,14 +66,25 @@ document.addEventListener('DOMContentLoaded', () => {
   searchBtn.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    // const version = versionInput.value;
-    const name = nameInput.value;
+    const version = versionInput.value;
+    const name = nameInput.value.replace(/ /g, '-');
+
+    if (!version) {
+      notification.error('please enter version of the icon');
+      return;
+    }
+
+    if (!name) {
+      notification.error('please enter name of the icon');
+      return;
+    }
 
     // clear old results
     iconsResults.innerHTML = '';
 
     for (const type of types) {
-      let svg = await getSVG(version, type, name);
+      // fix issue on duotone-solid
+      let svg = await getSVG(version, type == 'duotone-solid' ? 'duotone' : type, name);
 
       if (svg) {
         const listIcon = createListIcon(svg, type, name);
@@ -109,10 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (copy) {
       copyToClipboard(iconSVG);
-      notification.displaySuccess(`the <span>${iconName}.svg</span> has been successfully copied to your clipboard.`);
+      notification.success(`the <span>${iconName}.svg</span> has been successfully copied to your clipboard.`);
     } else if (download) {
       downloadSVG(iconSVG, iconName);
-      notification.displaySuccess(`the <span>${iconName}.svg</span> has been successfully saved.`);
+      notification.success(`the <span>${iconName}.svg</span> has been successfully saved.`);
     } else if (close) {
       iconsDownload.classList.remove('download--active');
     } else if (previous) {

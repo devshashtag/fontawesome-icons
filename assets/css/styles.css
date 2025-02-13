@@ -170,17 +170,34 @@ main.main .icons__search {
   display: flex;
   background-color: #3a4047;
 }
+main.main .icons__search #version,
 main.main .icons__search #name {
-  flex: 1;
-  padding: 1rem 2rem;
-  font-size: 2rem;
+  padding: 1rem;
+  font-size: 1.5rem;
   width: 100%;
   background-color: #353a40;
   color: #b3b3b3;
 }
+main.main .icons__search #version::placeholder,
 main.main .icons__search #name::placeholder {
   text-transform: capitalize;
   color: #919191;
+}
+main.main .icons__search #version:is(:-webkit-autofill, :autofill), main.main .icons__search #version:is(:-webkit-autofill, :autofill):focus,
+main.main .icons__search #name:is(:-webkit-autofill, :autofill),
+main.main .icons__search #name:is(:-webkit-autofill, :autofill):focus {
+  -webkit-box-shadow: 0 0 0 100rem #353a40 inset;
+  -webkit-text-fill-color: #b3b3b3;
+  caret-color: #b3b3b3;
+}
+main.main .icons__search #version {
+  flex: 1;
+  min-width: 8rem;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  border-right: 0.1rem solid #3a4047;
+  color: #9cd8c5;
 }
 main.main .icons__search #search {
   box-sizing: content-box;
@@ -273,6 +290,7 @@ main.main .icons__list .icons__download {
   width: 100%;
   gap: 2rem;
   background-color: #3e424a;
+  box-shadow: 0 0 0.5rem #8c9f9e inset;
   padding: 1rem;
 }
 main.main .icons__list .icons__download.download--active {

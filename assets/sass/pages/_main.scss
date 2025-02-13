@@ -17,11 +17,10 @@ main.main {
     display: flex;
     background-color: $search-bg;
 
+    #version,
     #name {
-      flex: 1;
-
-      padding: 1rem 2rem;
-      font-size: 2rem;
+      padding: 1rem;
+      font-size: 1.5rem;
       width: 100%;
 
       background-color: $search-input-bg;
@@ -31,6 +30,23 @@ main.main {
         text-transform: capitalize;
         color: $search-input-placeholder-fg;
       }
+
+      &:is(:-webkit-autofill, :autofill),
+      &:is(:-webkit-autofill, :autofill):focus {
+        -webkit-box-shadow: 0 0 0 100rem $search-input-bg inset;
+        -webkit-text-fill-color: $search-input-fg;
+        caret-color: $page-fg;
+      }
+    }
+
+    #version {
+      flex: 1;
+      min-width: 8rem;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      border-right: 0.1rem solid $search-bg;
+      color: $search-version-fg;
     }
 
     #search {
@@ -141,6 +157,7 @@ main.main {
       gap: 2rem;
 
       background-color: $download-bg;
+      box-shadow: 0 0 0.5rem $download-shadow inset;
       padding: 1rem;
 
       &.download--active {
@@ -207,6 +224,7 @@ main.main {
           }
         }
       }
+
       .download__view {
         display: flex;
         justify-content: space-between;

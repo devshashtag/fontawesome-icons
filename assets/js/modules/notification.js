@@ -27,7 +27,7 @@ class Notification {
     }, timeout);
   }
 
-  displayMessage(message, type, timeout) {
+  message(message, type, timeout) {
     // // skip if notification already exist
     // if (this.notificationList.innerHTML.includes(message)) return;
 
@@ -51,16 +51,16 @@ class Notification {
     notification.addEventListener('dblclick', () => this.hide(notification));
   }
 
-  displayInfo(message, timeout = 2500) {
-    this.displayMessage(message, 'info', timeout);
+  info(message, timeout = 2500) {
+    this.message(message, 'info', timeout);
   }
 
-  displaySuccess(message, timeout = 2500) {
-    this.displayMessage(message, 'success', timeout);
+  success(message, timeout = 2500) {
+    this.message(message, 'success', timeout);
   }
 
-  displayError(message, timeout = 2500) {
-    this.displayMessage(message, 'error', timeout);
+  error(message, timeout = 2500) {
+    this.message(message, 'error', timeout);
   }
 }
 
