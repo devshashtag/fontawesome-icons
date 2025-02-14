@@ -53,10 +53,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconClass = icon.dataset.class;
     const iconSVG = icon.querySelector('.icon__preview').innerHTML;
     const iconName = icon.querySelector('.icon__name').innerHTML;
+    const iconType = iconClass.split(' ').slice(0, -1).join('-').replaceAll('fa-', '');
+    const iconStyle =
+      iconType.includes('duotone') || iconType.includes('sharp')
+        ? `&lt;link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v${versionInput.value}/css/${iconType}.css"&gt<br>`
+        : '';
 
     downloadName.innerText = iconName;
     downloadPreview.innerHTML = iconSVG;
-    downloadClass.innerHTML = `&lt;i class="<span>${iconClass}</span>"&gt;&lt/i&gt;`;
+    downloadClass.innerHTML = `
+    &lt;link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v${versionInput.value}/css/all.css"&gt<br>
+    ${iconStyle}
+    &lt;i class="<span>${iconClass}</span>"&gt;&lt/i&gt;
+    `;
 
     // display download preview
     iconsDownload.classList.add('download--active');
