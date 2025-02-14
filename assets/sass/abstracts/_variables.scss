@@ -9,14 +9,10 @@ $scroll-bar: #505050;
 $scroll-bar-hover: #808080;
 $scroll-bar-bg: #202020;
 
-// submit
-$submit-bg: #575c62;
-$submit-fg: #cbcbcb;
-$submit-bg-hover: #6a7078;
-$submit-fg-hover: #ebebeb;
+// main
+$main-bg: #3a4047;
 
 // search
-$search-bg: #3a4047;
 $search-input-bg: #353a40;
 $search-input-fg: $page-fg;
 $search-version-fg: #9cd8c5;
@@ -25,12 +21,9 @@ $search-icon-fg: #cacaca;
 $search-icon-hover-fg: #fbf3c6;
 $search-icon-loading-fg: #d89c9c;
 
-// lists
-$list-bg: #3a4047;
-
 // results
 $result-bg: #353a40;
-$result-icon-bg: #42474d;
+$result-icon-bg: #3a4047;
 $result-icon-fg: #56a3b8;
 
 // download
@@ -39,6 +32,7 @@ $download-shadow: #8c9f9e;
 $download-name-fg: #fcd8a1;
 $download-name-symbols-fg: #ec406a;
 $download-icon-fg: #99abc0;
+$download-icon-bg: #0001;
 $download-icon-hover-fg: #fcd8a1;
 $download-close-hover-fg: #e77f8f;
 $download-info-bg: #303339;
