@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       &lt;link
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v${version}/css/all.css"&gt
-      <br>
+      <br><br>
     `;
 
     if (isFontPro) {
@@ -72,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
         &lt;link
           rel="stylesheet"
           href="https://site-assets.fontawesome.com/releases/v${version}/css/${iconType}.css"&gt
-        <br>
+        <br><br>
       `;
     }
 
     // update download section
-    downloadName.innerText = iconName;
+    downloadName.innerText = `${iconName}-${iconType}`;
     downloadPreview.innerHTML = iconSVG;
     downloadClass.innerHTML = `
     ${fontLink}
@@ -120,6 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     iconsResults.innerHTML = '';
 
     for (const type of types) {
+      if (signal.aborted) break;
+
       // fix issue on duotone-solid
       let svg = await getSVG(version, type == 'duotone-solid' ? 'duotone' : type, name, signal);
 
@@ -132,11 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    if (!signal.aborted && iconsResults.innerHTML == '') {
-      notification.error('an error occurred while loading icons');
-    }
+    if (!signal.aborted) {
+      searchBtn.classList.remove('loading');
 
-    if (!signal.aborted) searchBtn.classList.remove('loading');
+      if (iconsResults.innerHTML == '') {
+        notification.error('an error occurred while loading icons');
+      }
+    }
   });
 
   iconsResults.addEventListener('click', (e) => {
