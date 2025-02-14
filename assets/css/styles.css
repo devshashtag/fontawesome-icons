@@ -224,7 +224,7 @@ main.main .icons__search #search.loading .loader {
 }
 main.main .icons__search #search .loader {
   display: none;
-  fill: #9cd8c5;
+  fill: #d89c9c;
   animation-name: spin;
   animation-direction: normal;
   animation-duration: 1s;
