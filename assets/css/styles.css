@@ -157,7 +157,7 @@ body {
 }
 
 main.main {
-  padding: 1rem;
+  padding: 2rem;
 }
 main.main .main__icons {
   display: flex;
@@ -166,9 +166,9 @@ main.main .main__icons {
   margin: 0 auto;
 }
 main.main .icons__search {
-  padding: 1rem;
   display: flex;
   background-color: #3a4047;
+  padding: 0.5rem;
 }
 main.main .icons__search #version,
 main.main .icons__search #name {
@@ -307,14 +307,14 @@ main.main .icons__list .icons__download {
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border-radius: 0.2rem;
-  max-width: 30rem;
-  width: 100%;
+  justify-content: space-between;
   gap: 2rem;
+  padding: 1rem;
   background-color: #3e424a;
   box-shadow: 0 0 0.5rem #8c9f9e inset;
-  padding: 1rem;
+  border-radius: 0.2rem;
+  max-width: 30rem;
+  width: calc(100% - 4rem);
 }
 main.main .icons__list .icons__download.download--active {
   display: flex;
@@ -394,7 +394,7 @@ main.main .icons__list .icons__download .download__view .download__preview {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 10rem;
+  height: 15rem;
   padding: 1rem;
   fill: #56a3b8;
   background-color: #42474d;
