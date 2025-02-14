@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signal = controller.signal;
 
     const version = versionInput.value;
-    const name = nameInput.value.replace(/ /g, '-');
+    const name = nameInput.value.replace(/ /g, '-').trim();
 
     if (!version) {
       notification.error('please enter version of the icon');
