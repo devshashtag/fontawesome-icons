@@ -13,15 +13,12 @@ export function getIconTypes() {
 
   let types = [];
 
+  types.push('brands');
+
   for (const family of iconFamily) {
     for (const style of iconStyles) {
-      let type = '';
+      let type = family ? `${family}-${style}` : style;
 
-      if (family) {
-        type = family + '-';
-      }
-
-      type += style;
       types.push(type);
     }
   }
