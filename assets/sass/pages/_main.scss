@@ -56,18 +56,49 @@ main.main {
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: $search-input-bg;
 
       padding: 1rem;
       max-height: 3rem;
       aspect-ratio: 1;
 
-      background-color: $search-input-bg;
       fill: $search-icon-fg;
       transition: filter 0.2s linear, fill 0.3s linear;
 
-      &:hover {
+      &:not(:disabled):hover {
         filter: drop-shadow(0 0 0.2rem #0005);
         fill: $search-icon-hover-fg;
+      }
+
+      &.loading {
+        .search {
+          display: none;
+        }
+
+        .loader {
+          display: block;
+        }
+      }
+    }
+
+    #search .loader {
+      display: none;
+      fill: $search-icon-loading-fg;
+
+      animation-name: spin;
+      animation-direction: normal;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: steps(8);
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(1turn);
+        }
       }
     }
   }

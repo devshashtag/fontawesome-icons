@@ -205,16 +205,39 @@ main.main .icons__search #search {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #353a40;
   padding: 1rem;
   max-height: 3rem;
   aspect-ratio: 1;
-  background-color: #353a40;
   fill: #cacaca;
   transition: filter 0.2s linear, fill 0.3s linear;
 }
-main.main .icons__search #search:hover {
+main.main .icons__search #search:not(:disabled):hover {
   filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.3333333333));
   fill: #fbf3c6;
+}
+main.main .icons__search #search.loading .search {
+  display: none;
+}
+main.main .icons__search #search.loading .loader {
+  display: block;
+}
+main.main .icons__search #search .loader {
+  display: none;
+  fill: #9cd8c5;
+  animation-name: spin;
+  animation-direction: normal;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(8);
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }
 main.main .icons__list {
   background-color: #3a4047;

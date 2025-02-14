@@ -37,6 +37,7 @@ function createListIcon(svg, type, name) {
 
 document.addEventListener('DOMContentLoaded', () => {
   let notification = new Notification();
+  let controller;
 
   const types = getIconTypes();
   const versionInput = document.getElementById('version');
@@ -50,30 +51,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadClass = iconsDownload.querySelector('.download__class');
 
   function displayDownload(icon) {
+    const version = versionInput.value;
     const iconClass = icon.dataset.class;
     const iconSVG = icon.querySelector('.icon__preview').innerHTML;
     const iconName = icon.querySelector('.icon__name').innerHTML;
-    const iconType = iconClass.split(' ').slice(0, -1).join('-').replaceAll('fa-', '');
-    const iconStyle =
-      iconType.includes('duotone') || iconType.includes('sharp')
-        ? `&lt;link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v${versionInput.value}/css/${iconType}.css"&gt<br>`
-        : '';
 
+    // icon type and link
+    const iconType = iconClass.split(' ').slice(0, -1).join('-').replaceAll('fa-', '');
+    const isFontPro = iconType.includes('duotone') || iconType.includes('sharp');
+
+    let fontLink = `
+      &lt;link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v${version}/css/all.css"&gt
+      <br>
+    `;
+
+    if (isFontPro) {
+      fontLink += `
+        &lt;link
+          rel="stylesheet"
+          href="https://site-assets.fontawesome.com/releases/v${version}/css/${iconType}.css"&gt
+        <br>
+      `;
+    }
+
+    // update download section
     downloadName.innerText = iconName;
     downloadPreview.innerHTML = iconSVG;
     downloadClass.innerHTML = `
-    &lt;link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v${versionInput.value}/css/all.css"&gt<br>
-    ${iconStyle}
+    ${fontLink}
     &lt;i class="<span>${iconClass}</span>"&gt;&lt/i&gt;
     `;
 
-    // display download preview
+    // display download section
     iconsDownload.classList.add('download--active');
   }
 
   // search
   searchBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+
+    // abort
+    if (controller) {
+      controller.abort();
+      controller = null;
+    }
+
+    controller = new AbortController();
+    const signal = controller.signal;
 
     const version = versionInput.value;
     const name = nameInput.value.replace(/ /g, '-');
@@ -88,18 +114,29 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    searchBtn.classList.add('loading');
+
     // clear old results
     iconsResults.innerHTML = '';
 
     for (const type of types) {
       // fix issue on duotone-solid
-      let svg = await getSVG(version, type == 'duotone-solid' ? 'duotone' : type, name);
+      let svg = await getSVG(version, type == 'duotone-solid' ? 'duotone' : type, name, signal);
 
       if (svg) {
         const listIcon = createListIcon(svg, type, name);
         iconsResults.insertAdjacentHTML('beforeend', listIcon);
+
+        //  break if the type is 'brands', since 'brands' only has one icon
+        if (type == 'brands') break;
       }
     }
+
+    if (!signal.aborted && iconsResults.innerHTML == '') {
+      notification.error('an error occurred while loading icons');
+    }
+
+    if (!signal.aborted) searchBtn.classList.remove('loading');
   });
 
   iconsResults.addEventListener('click', (e) => {
