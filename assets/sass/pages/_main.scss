@@ -1,7 +1,7 @@
 @use '../abstracts' as *;
 
 main.main {
-  padding: 1rem;
+  padding: 2rem;
 
   .main__icons {
     display: flex;
@@ -13,9 +13,9 @@ main.main {
 
   // search
   .icons__search {
-    padding: 1rem;
     display: flex;
     background-color: $search-bg;
+    padding: 0.5rem;
 
     #version,
     #name {
@@ -181,15 +181,15 @@ main.main {
       display: none;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      border-radius: 0.2rem;
-      max-width: 30rem;
-      width: 100%;
+      justify-content: space-between;
       gap: 2rem;
+      padding: 1rem;
 
       background-color: $download-bg;
       box-shadow: 0 0 0.5rem $download-shadow inset;
-      padding: 1rem;
+      border-radius: 0.2rem;
+      max-width: 30rem;
+      width: calc(100% - 4rem);
 
       &.download--active {
         display: flex;
@@ -287,7 +287,7 @@ main.main {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 10rem;
+          height: 15rem;
           padding: 1rem;
           fill: $result-icon-fg;
 
