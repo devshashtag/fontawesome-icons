@@ -2,6 +2,7 @@ import { addId } from './fontawesome.js';
 
 class IconSearch {
   constructor(appName) {
+    this.searchBtn = document.getElementById('search');
     this.searchInput = document.getElementById('name');
     this.iconSearchList = document.getElementById('iconSearchList');
     this.configName = appName;
@@ -52,6 +53,7 @@ class IconSearch {
       if (element.dataset) {
         this.searchInput.value = element.dataset.name;
         this.iconSearchList.innerHTML = '';
+        this.searchBtn.click();
       }
     });
 
@@ -70,8 +72,10 @@ class IconSearch {
 
         case 'Enter':
         case 'Tab':
+          event.preventDefault();
           this.searchInput.value = this.selected.dataset.name;
           this.iconSearchList.innerHTML = '';
+          this.searchBtn.click();
           break;
 
         case 'ArrowUp':
