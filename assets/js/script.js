@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadClass = iconsDownload.querySelector('.download__class');
 
   const notification = new Notification();
-  const iconSearch = new IconSearch('fontawesome-icons').init();
+  new IconSearch('fontawesome-icons').init(); // init iconsearch
   let controller;
 
   async function copyToClipboard(text) {

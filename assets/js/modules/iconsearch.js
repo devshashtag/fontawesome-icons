@@ -1,5 +1,3 @@
-import { addId } from './fontawesome.js';
-
 class IconSearch {
   constructor(appName) {
     this.searchBtn = document.getElementById('search');
@@ -118,7 +116,7 @@ class IconSearch {
       const iconAliases = results.iconAliases.map((alias) => `<li class="icon-alias" data-name="${alias[1]}">${alias[0]}</li>`);
       const matched = [...iconNames, ...iconAliases]
         .sort((a, b) => this.sortByMostMatched(a, b, name))
-        .slice(0, 100)
+        .slice(0, 50)
         .join('\n');
 
       this.iconSearchList.insertAdjacentHTML('beforeend', matched);
@@ -168,8 +166,7 @@ class IconSearch {
   }
 
   searchIcon(name) {
-    const compare = (a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' });
-    const names = name.toLowerCase().split(' ');
+    const names = name.toLowerCase().split(/[- ]/);
     const results = {
       iconNames: [],
       iconAliases: [],
