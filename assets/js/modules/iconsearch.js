@@ -114,7 +114,7 @@ class IconSearch {
       const iconAliases = results.iconAliases.map((alias) => `<li class="icon-alias" data-name="${alias[1]}">${alias[0]}</li>`);
       const matched = [...iconNames, ...iconAliases]
         .sort((a, b) => this.sortByMostMatched(a, b, name))
-        // .slice(0, 20) #limit to 20 items persearch
+        .slice(0, 100)
         .join('\n');
 
       this.iconSearchList.insertAdjacentHTML('beforeend', matched);
