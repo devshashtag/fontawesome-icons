@@ -5,9 +5,9 @@ $page-bg: #282c2f;
 $page-fg: #b3b3b3;
 
 // scroll-bar
-$scroll-bar: #505050;
-$scroll-bar-hover: #808080;
-$scroll-bar-bg: #202020;
+$scroll-bar: #8f8f8f;
+$scroll-bar-hover: #9c9c9c;
+$scroll-bar-bg: #606060;
 
 // main
 $main-bg: #3a4047;
@@ -20,6 +20,15 @@ $search-input-placeholder-fg: #919191;
 $search-icon-fg: #cacaca;
 $search-icon-hover-fg: #fbf3c6;
 $search-icon-loading-fg: #d89c9c;
+$iconsearch-bg: $main-bg;
+$iconsearch-border: #8c9f9e;
+$iconsearch-items-bg: $search-input-bg;
+$iconsearch-items-matched-fg: #f9eb99;
+$iconsearch-items-hover-bg: #485058;
+$iconsearch-items-selected-bg: #4e5966;
+$iconsearch-icon-name-fg: #4b93e5;
+$iconsearch-icon-alias-fg: #7bab91;
+$iconsearch-tag-fg: #000;
 
 // results
 $result-bg: #353a40;

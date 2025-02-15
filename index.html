@@ -18,7 +18,7 @@
         <!-- search -->
         <form class="icons__search" action="#">
           <input type="text" name="version" id="version" value="6.7.2" placeholder="version" />
-          <input type="text" name="name" id="name" placeholder="search font-awesome icons..." />
+          <input type="text" name="name" id="name" placeholder="search font-awesome icons..." autocomplete="off" />
 
           <button id="search">
             <svg class="search">
@@ -31,6 +31,10 @@
               <use href="assets/icons/loader.svg#loader"></use>
             </svg>
           </button>
+
+          <div class="icon-search">
+            <ul id="iconSearchList"></ul>
+          </div>
         </form>
 
         <!-- icons -->

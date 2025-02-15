@@ -1,0 +1,97 @@
+@use '../abstracts' as *;
+
+.icon-search {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  left: 0;
+  padding: 0.5rem;
+
+  background-color: $iconsearch-bg;
+  box-shadow: 0 0 0.1rem 1px $iconsearch-border inset;
+  transition: opacity 0.2s linear, visibility 0.2s linear, transform 0.3s linear;
+
+  &:has(#iconSearchList:empty) {
+    padding: 0.1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(1rem);
+  }
+
+  #iconSearchList {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    max-height: 15rem;
+    overflow-y: scroll;
+
+    scroll-snap-type: y mandatory;
+    scroll-padding: 0.1rem;
+
+    // items
+    li {
+      scroll-snap-align: start;
+      cursor: pointer;
+      padding: 0.5rem;
+      width: 100%;
+
+      background-color: $iconsearch-items-bg;
+
+      // matched text
+      span {
+        color: $iconsearch-items-matched-fg;
+        font-weight: bold;
+      }
+
+      &:hover {
+        background-color: $iconsearch-items-hover-bg;
+      }
+
+      // selected
+      &.selected {
+        background-color: $iconsearch-items-selected-bg;
+      }
+    }
+
+    // tag
+    .icon-name::before,
+    .icon-alias::before,
+    .icon-alias::after {
+      display: inline-block;
+      margin-right: 1rem;
+      border-radius: 0.1rem;
+      padding: 0.1rem 0.2rem;
+      text-align: center;
+      min-width: 5rem;
+      color: $iconsearch-tag-fg;
+    }
+
+    .icon-name {
+      color: $iconsearch-icon-name-fg;
+
+      &::before {
+        content: 'icon-name';
+        background-color: $iconsearch-icon-name-fg;
+      }
+    }
+
+    .icon-alias {
+      color: $iconsearch-icon-alias-fg;
+
+      &::before {
+        content: 'icon-alias';
+        background-color: $iconsearch-icon-alias-fg;
+      }
+
+      &::after {
+        content: '(' attr(data-name) ')';
+        color: $iconsearch-icon-alias-fg;
+        margin-right: 0;
+        margin-left: 1rem;
+      }
+    }
+  }
+}

@@ -1,44 +1,8 @@
 import { getIconTypes, getSVG } from './modules/fontawesome.js';
 import Notification from './modules/notification.js';
-
-function copyToClipboard(text) {
-  let input = document.createElement('input');
-  input.value = text;
-
-  document.body.appendChild(input);
-
-  input.select();
-  document.execCommand('copy');
-
-  document.body.removeChild(input);
-}
-
-function downloadSVG(svg, name) {
-  let element = document.createElement('a');
-  element.setAttribute('href', 'data:svg/plain;charset=utf-8,' + encodeURIComponent(svg));
-  element.setAttribute('download', name + '.svg');
-  element.style.display = 'none';
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
-}
-
-function createListIcon(svg, type, name) {
-  const iconClass = [...type.split(/-(?=[^-]*$)/).map((type) => 'fa-' + type), 'fa-' + name].join(' ');
-
-  return `
-    <!-- icon -->
-    <li class="icons__icon" data-class="${iconClass}">
-        <div class="icon__preview">${svg}</div>
-        <div class="icon__name">${name}</div>
-    </li>
-  `;
-}
+import IconSearch from './modules/iconsearch.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  let notification = new Notification();
-  let controller;
-
   const types = getIconTypes();
   const versionInput = document.getElementById('version');
   const nameInput = document.getElementById('name');
@@ -49,6 +13,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadName = iconsDownload.querySelector('.download__name');
   const downloadPreview = iconsDownload.querySelector('.download__preview');
   const downloadClass = iconsDownload.querySelector('.download__class');
+
+  const notification = new Notification();
+  const iconSearch = new IconSearch('fontawesome-icons').init();
+  let controller;
+
+  async function copyToClipboard(text) {
+    let input = document.createElement('input');
+    input.value = text;
+
+    document.body.appendChild(input);
+
+    input.select();
+    try {
+      // Write the text to the clipboard
+      await navigator.clipboard.writeText(text);
+    } catch (error) {
+      notification.error('Failed to copy text:', error);
+    }
+
+    document.body.removeChild(input);
+  }
+
+  function downloadSVG(svg, name) {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:svg/plain;charset=utf-8,' + encodeURIComponent(svg));
+    element.setAttribute('download', name + '.svg');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+
+  function createListIcon(svg, type, name) {
+    const iconClass = [...type.split(/-(?=[^-]*$)/).map((type) => 'fa-' + type), 'fa-' + name].join(' ');
+
+    return `
+    <!-- icon -->
+    <li class="icons__icon" data-class="${iconClass}">
+        <div class="icon__preview">${svg}</div>
+        <div class="icon__name">${name}</div>
+    </li>
+  `;
+  }
 
   function displayDownload(icon) {
     const version = versionInput.value;
@@ -151,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  iconsDownload.addEventListener('click', (e) => {
+  iconsDownload.addEventListener('click', async (e) => {
     const element = e.target;
 
     // buttons
@@ -166,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconClass = downloadClass.querySelector('span').innerHTML;
 
     if (copy) {
-      copyToClipboard(iconSVG);
+      await copyToClipboard(iconSVG);
       notification.success(`the <span>${iconName}.svg</span> has been successfully copied to your clipboard.`);
     } else if (download) {
       downloadSVG(iconSVG, iconName);

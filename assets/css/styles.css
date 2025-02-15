@@ -56,7 +56,7 @@ li {
 
 ::-webkit-scrollbar {
   cursor: default;
-  background-color: #202020;
+  background-color: #606060;
   height: 0.8rem;
   width: 0.8rem;
 }
@@ -67,12 +67,12 @@ li {
 
 ::-webkit-scrollbar-thumb {
   cursor: pointer;
-  background-color: #505050;
+  background-color: #8f8f8f;
 }
 
 ::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {
-  background-color: #808080;
+  background-color: #9c9c9c;
 }
 
 html {
@@ -156,6 +156,82 @@ body {
   color: #fbf3c6;
 }
 
+.icon-search {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  left: 0;
+  padding: 0.5rem;
+  background-color: #3a4047;
+  box-shadow: 0 0 0.1rem 1px #8c9f9e inset;
+  transition: opacity 0.2s linear, visibility 0.2s linear, transform 0.3s linear;
+}
+.icon-search:has(#iconSearchList:empty) {
+  padding: 0.1rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem);
+}
+.icon-search #iconSearchList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.1rem;
+  max-height: 15rem;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-padding: 0.1rem;
+}
+.icon-search #iconSearchList li {
+  scroll-snap-align: start;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: #353a40;
+}
+.icon-search #iconSearchList li span {
+  color: #f9eb99;
+  font-weight: bold;
+}
+.icon-search #iconSearchList li:hover {
+  background-color: #485058;
+}
+.icon-search #iconSearchList li.selected {
+  background-color: #4e5966;
+}
+.icon-search #iconSearchList .icon-name::before,
+.icon-search #iconSearchList .icon-alias::before,
+.icon-search #iconSearchList .icon-alias::after {
+  display: inline-block;
+  margin-right: 1rem;
+  border-radius: 0.1rem;
+  padding: 0.1rem 0.2rem;
+  text-align: center;
+  min-width: 5rem;
+  color: #000;
+}
+.icon-search #iconSearchList .icon-name {
+  color: #4b93e5;
+}
+.icon-search #iconSearchList .icon-name::before {
+  content: "icon-name";
+  background-color: #4b93e5;
+}
+.icon-search #iconSearchList .icon-alias {
+  color: #7bab91;
+}
+.icon-search #iconSearchList .icon-alias::before {
+  content: "icon-alias";
+  background-color: #7bab91;
+}
+.icon-search #iconSearchList .icon-alias::after {
+  content: "(" attr(data-name) ")";
+  color: #7bab91;
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
 main.main {
   padding: 2rem;
 }
@@ -169,6 +245,7 @@ main.main .main__icons {
   background-color: #3a4047;
 }
 main.main .icons__search {
+  position: relative;
   display: flex;
 }
 main.main .icons__search #version,

@@ -28,9 +28,9 @@ export function getIconTypes() {
 
 export async function getSVG(version = '6.7.2', type = 'solid', name = 'rocket', signal) {
   try {
-    let svg = await fetch(`https://site-assets.fontawesome.com/releases/v${version}/svgs/${type}/${name}.svg`, { signal }).then((response) =>
-      response.text()
-    );
+    const url = `https://site-assets.fontawesome.com/releases/v${version}/svgs/${type}/${name}.svg`;
+    console.log(url);
+    let svg = await fetch(url, { signal }).then((response) => response.text());
 
     if (svg.includes('<path')) {
       // remove all comments
