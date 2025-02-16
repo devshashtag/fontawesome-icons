@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadClass = iconsDownload.querySelector('.download__class');
 
   const notification = new Notification();
-  new IconSearch('fontawesome-icons').init(); // init iconsearch
+  const iconSearch = new IconSearch('fontawesome-icons');
   let controller;
+
+  iconSearch.init();
 
   async function copyToClipboard(text) {
     let input = document.createElement('input');
@@ -98,6 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // search
   searchBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+
+    // close download
+    iconsDownload.classList.remove('download--active');
+    // close autocomplete
+    iconSearch.close();
 
     // abort
     if (controller) {

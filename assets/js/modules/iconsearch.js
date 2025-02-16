@@ -21,6 +21,10 @@ class IconSearch {
     this.setupEvents();
   }
 
+  close() {
+    this.iconSearchList.innerHTML = '';
+  }
+
   sortByMostMatched(a, b, name) {
     // extract the text content from the html string
     const aText = a.replace(/<[^>]*>/g, '').toLowerCase(); // remove html tags
@@ -50,7 +54,7 @@ class IconSearch {
 
       if (element.dataset) {
         this.searchInput.value = element.dataset.name;
-        this.iconSearchList.innerHTML = '';
+        this.close();
         this.searchBtn.click();
       }
     });
@@ -63,17 +67,24 @@ class IconSearch {
       let nextSelected;
 
       switch (event.key) {
+        // close suggestions
         case 'Escape':
           event.preventDefault();
-          this.iconSearchList.innerHTML = '';
+          this.close();
           break;
 
+        // autocomplete and search
         case 'Enter':
+          event.preventDefault();
+          this.searchInput.value = this.selected.dataset.name;
+          this.close();
+          this.searchBtn.click();
+          break;
+
+        // autocomplete
         case 'Tab':
           event.preventDefault();
           this.searchInput.value = this.selected.dataset.name;
-          this.iconSearchList.innerHTML = '';
-          this.searchBtn.click();
           break;
 
         case 'ArrowUp':
@@ -104,7 +115,7 @@ class IconSearch {
     this.searchInput.addEventListener('input', () => {
       const name = this.searchInput.value.trim().toLowerCase();
 
-      this.iconSearchList.innerHTML = '';
+      this.close();
 
       if (!name) return;
 
