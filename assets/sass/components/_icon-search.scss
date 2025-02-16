@@ -87,9 +87,10 @@
       }
 
       &::after {
-        content: '(' attr(data-name) ')';
-        color: $iconsearch-icon-alias-fg;
+        content: '( ' attr(data-name) ' )';
+        color: $iconsearch-icon-name-fg;
         margin-right: 0;
+        min-width: unset;
         margin-left: 1rem;
       }
     }

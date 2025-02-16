@@ -209,26 +209,27 @@ body {
   padding: 0.1rem 0.2rem;
   text-align: center;
   min-width: 5rem;
-  color: #000;
+  color: #121212;
 }
 .icon-search #iconSearchList .icon-name {
-  color: #4b93e5;
+  color: #8ab1dc;
 }
 .icon-search #iconSearchList .icon-name::before {
   content: "icon-name";
-  background-color: #4b93e5;
+  background-color: #8ab1dc;
 }
 .icon-search #iconSearchList .icon-alias {
-  color: #7bab91;
+  color: #edb3a0;
 }
 .icon-search #iconSearchList .icon-alias::before {
   content: "icon-alias";
-  background-color: #7bab91;
+  background-color: #edb3a0;
 }
 .icon-search #iconSearchList .icon-alias::after {
-  content: "(" attr(data-name) ")";
-  color: #7bab91;
+  content: "( " attr(data-name) " )";
+  color: #8ab1dc;
   margin-right: 0;
+  min-width: unset;
   margin-left: 1rem;
 }
 
